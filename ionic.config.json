@@ -1,0 +1,7 @@
+{
+  "name": "IonicTemplate",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
