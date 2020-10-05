@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  base_url: 'https://vic-adminpro-backend.herokuapp.com/api'
 };
