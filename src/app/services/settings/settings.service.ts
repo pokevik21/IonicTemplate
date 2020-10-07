@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@angular/core';
-import { temporaryAllocator } from '@angular/compiler/src/render3/view/util';
 import { DOCUMENT } from '@angular/common';
 
 @Injectable({

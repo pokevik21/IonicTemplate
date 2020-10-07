@@ -9,18 +9,21 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { BreadcumsComponent } from './breadcums/breadcums.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     Page404Component,
-    SidebarComponent
+    SidebarComponent,
+    BreadcumsComponent
   ],
   exports: [
     HeaderComponent,
     Page404Component,
-    SidebarComponent
+    SidebarComponent,
+    BreadcumsComponent
   ],
   imports: [
     RouterModule,

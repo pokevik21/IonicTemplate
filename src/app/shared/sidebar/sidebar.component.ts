@@ -10,14 +10,73 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class SidebarComponent implements OnInit {
 
-  public selectedIndex = 0;
-  public appPages = [
+  public selectedIndex = '';
+  public menus = [
+  { title: 'Configuracion',
+    submenu: [
     {
       title: 'Dashboard',
       url: '/app',
-      icon: 'pie-chart-outline'
+      icon: 'speedometer-outline'
+    },
+    {
+      title: 'Perfil',
+      url: '/app/perfil',
+      icon: 'person-circle-outline'
+    },
+    {
+      title: 'Ajustes',
+      url: '/app/account-settings',
+      icon: 'settings-outline'
     }
-  ];
+    ]
+  },
+  {
+    title: 'Herramientas',
+    submenu: [
+      {
+        title: 'Graficos',
+        url: '/app/graficos',
+        icon: 'stats-chart-outline'
+      },
+      {
+        title: 'Progress',
+        url: '/app/progress',
+        icon: 'battery-half-outline'
+      },
+      {
+        title: 'Promesas',
+        url: '/app/promesas',
+        icon: 'pulse-outline'
+      },
+      {
+        title: 'Rxjs',
+        url: '/app/rxjs',
+        icon: 'shapes-outline'
+      }
+    ]
+  },
+  {
+    title: 'Mantenimiento',
+    submenu: [
+      {
+        title: 'Usuarios',
+        url: '/app/usuarios',
+        icon: 'people-circle-outline'
+      },
+      {
+        title: 'Medicos',
+        url: '/app/medicos',
+        icon: 'thermometer-outline'
+      },
+      {
+        title: 'Hospitales',
+        url: '/app/hospitales',
+        icon: 'business-outline'
+      }
+    ]
+  }
+];
 
   constructor(
     private menu: MenuController,
@@ -49,12 +108,36 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
+    this.cargarIndex();
+  }
+
+  cambiarIndex( nums: number[] ){
+    const index = `${nums[0]}${nums[1]}`;
+    this.selectedIndex = index;
+  }
+
+  cargarIndex() {
+    const path = window.location.pathname.split('app/')[1];
+
     if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.menus.length; i++) {
+        const apartado = this.menus[i];
+        const busqueda = (apartado.submenu.findIndex( menu => {
+          const pathMenu = menu.url.split('app/')[1];
+          // console.log(pathMenu);
+          return path === pathMenu;
+        }));
+
+        if (busqueda >= 0) {
+          this.selectedIndex = `${i}${busqueda}`;
+        }
+      }
+    }else {
+      this.selectedIndex = `00`;
     }
   }
+
 
 }
