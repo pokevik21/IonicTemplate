@@ -24,3 +24,42 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+// Animation background
+.login-bg {
+    background: linear-gradient(178deg, #470059, #002751);
+    background-size: 400% 400%;
+
+    animation: AnimationName 33s ease infinite;
+}
+
+@keyframes AnimationName {
+    0%{background-position:51% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:51% 0%}
+}
+// End - Animation background
+
+
+.centrado {
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.custom-card {
+    width: 30em;
+}
+
+.avatar {
+    height: 75px;
+    width: 75px;
+}
+
+.logout-button{
+    left:0;
+    right:0;
+    margin:0;
+    width: 100%;
+}

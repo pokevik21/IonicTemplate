@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { UsuarioService } from '../../services/usuario.service';
+import { SidebarService } from '../../services/shared/sidebar.service';
+import { Usuario } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,81 +13,20 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class SidebarComponent implements OnInit {
 
+  usuario: Usuario;
   public selectedIndex = '';
-  public menus = [
-  { title: 'Configuracion',
-    submenu: [
-    {
-      title: 'Dashboard',
-      url: '/app',
-      icon: 'speedometer-outline'
-    },
-    {
-      title: 'Perfil',
-      url: '/app/perfil',
-      icon: 'person-circle-outline'
-    },
-    {
-      title: 'Ajustes',
-      url: '/app/account-settings',
-      icon: 'settings-outline'
-    }
-    ]
-  },
-  {
-    title: 'Herramientas',
-    submenu: [
-      {
-        title: 'Graficos',
-        url: '/app/graficos',
-        icon: 'stats-chart-outline'
-      },
-      {
-        title: 'Progress',
-        url: '/app/progress',
-        icon: 'battery-half-outline'
-      },
-      {
-        title: 'Promesas',
-        url: '/app/promesas',
-        icon: 'pulse-outline'
-      },
-      {
-        title: 'Rxjs',
-        url: '/app/rxjs',
-        icon: 'shapes-outline'
-      }
-    ]
-  },
-  {
-    title: 'Mantenimiento',
-    submenu: [
-      {
-        title: 'Usuarios',
-        url: '/app/usuarios',
-        icon: 'people-circle-outline'
-      },
-      {
-        title: 'Medicos',
-        url: '/app/medicos',
-        icon: 'thermometer-outline'
-      },
-      {
-        title: 'Hospitales',
-        url: '/app/hospitales',
-        icon: 'business-outline'
-      }
-    ]
-  }
-];
 
   constructor(
     private menu: MenuController,
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private usuarioService: UsuarioService,
+    public sidebarService: SidebarService,
   ) {
     this.initializeApp();
+    this.sidebarService.cargarMenu();
+    this.usuario = usuarioService.usuario;
    }
 
    openFirst() {
@@ -110,6 +52,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.cargarIndex();
+    console.log(this.usuario.imagenUrl);
   }
 
   cambiarIndex( nums: number[] ){
@@ -118,14 +61,14 @@ export class SidebarComponent implements OnInit {
   }
 
   cargarIndex() {
-    const path = window.location.pathname.split('app/')[1];
+    const path = window.location.pathname;
 
     if (path !== undefined) {
       // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.menus.length; i++) {
-        const apartado = this.menus[i];
+      for (let i = 0; i < this.sidebarService.menus.length; i++) {
+        const apartado = this.sidebarService.menus[i];
         const busqueda = (apartado.submenu.findIndex( menu => {
-          const pathMenu = menu.url.split('app/')[1];
+          const pathMenu = menu.url;
           // console.log(pathMenu);
           return path === pathMenu;
         }));
@@ -135,9 +78,12 @@ export class SidebarComponent implements OnInit {
         }
       }
     }else {
-      this.selectedIndex = `00`;
+      this.selectedIndex = '';
     }
   }
 
+  logout(){
+    this.usuarioService.logout();
+  }
 
 }

@@ -5,23 +5,25 @@ import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth.router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicModule } from '@ionic/angular';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   exports: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    IonicModule.forRoot(),
+    AuthRoutingModule,
   ]
 })
 export class AuthModule { }

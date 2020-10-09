@@ -1,19 +1,68 @@
-<div class="menu-content" >
+<div class="menu-content">
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title>Menu</ion-title>
+      <ion-item color="primary">
+        <ion-avatar class="avatar" slot="start" color="none">
+          <img [src]="usuario.imagenUrl" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ usuario.nombre }}</h2>
+          <ion-menu-toggle auto-hide="false">
+            <ion-button
+              size="small"
+              color="none"
+              (click)="selectedIndex = ''"
+              [routerLink]="['/app/perfil']"
+              routerDirection="root"
+              lines="none"
+              detail="false"
+              ><small>Perfil</small></ion-button
+            >
+          </ion-menu-toggle>
+        </ion-label>
+      </ion-item>
+
+      <ion-menu-toggle auto-hide="false">
+        <ion-button
+          expand="full"
+          class="logout-button"
+          color="tertiary"
+          (click)="selectedIndex = ''"
+          [routerLink]="['/app/account-settings']"
+          routerDirection="root"
+          lines="none"
+          detail="false"
+          >Ajustes</ion-button
+        >
+        <ion-button
+          class="logout-button"
+          expand="full"
+          color="danger"
+          (click)="logout()"
+        >
+          <ion-icon name="log-out-outline"></ion-icon>
+          &nbsp; Cerrar sesión
+        </ion-button>
+      </ion-menu-toggle>
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-list>
-    <div *ngFor="let apartado of menus;let j = index" >
-  
-      <ion-toolbar>
-        &nbsp; {{ apartado.title }}
-      </ion-toolbar>
-      
-      <ion-menu-toggle auto-hide="false" *ngFor="let p of apartado.submenu; let i = index">
-        <ion-item (click)="cambiarIndex([j,i])" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex === ''+j+i">
+    <div *ngFor="let apartado of sidebarService.menus; let j = index">
+      <ion-toolbar> &nbsp; {{ apartado.title }} </ion-toolbar>
+
+      <ion-menu-toggle
+        auto-hide="false"
+        *ngFor="let p of apartado.submenu; let i = index"
+      >
+        <ion-item
+          (click)="cambiarIndex([j, i])"
+          routerDirection="root"
+          [routerLink]="[p.url]"
+          lines="none"
+          detail="false"
+          [class.selected]="selectedIndex === '' + j + i"
+        >
           <ion-icon slot="start" [name]="p.icon"></ion-icon>
           <ion-label>
             {{ p.title }}
@@ -22,12 +71,4 @@
       </ion-menu-toggle>
     </div>
   </ion-list>
-
-  <ion-footer>
-    <ion-button class="button-bottom" expand="full" color="danger">
-      <ion-icon name="log-out-outline"></ion-icon> 
-      &nbsp;
-      Cerrar sesión
-    </ion-button>
-  </ion-footer>
 </div>

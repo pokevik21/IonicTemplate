@@ -1,3 +1,4 @@
+import { AuthModule } from './auth/auth.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -9,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PagesModule } from './pages/pages.module';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,8 +18,10 @@ import { PagesModule } from './pages/pages.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    AuthModule,
     PagesModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PipesModule
   ],
   providers: [
     StatusBar,
