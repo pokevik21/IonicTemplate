@@ -7,8 +7,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PromesasComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
 
-  ngOnInit() {}
+    this.contarTes().then( msg => {
+
+      console.log('Temino!', msg);
+
+    }).catch( error => {
+
+        console.log('Error en la promesa', error);
+
+
+       }
+    );
+
+ }
+
+ngOnInit(): void {
+}
+
+contarTes(): Promise<boolean>{
+
+  return new Promise<boolean> ( ( resolve, reject ) => {
+
+    let contador = 0;
+
+    const intervalo = setInterval( () => {
+      contador += 1;
+      console.log(contador);
+
+      if (contador === 3) {
+        resolve( true );
+        clearInterval(intervalo);
+      }
+    }, 1000 );
+
+  } );
+
+}
 
 }

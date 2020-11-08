@@ -1,3 +1,19 @@
-<p>
-  graficos works!
-</p>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let grafico of ArrayGraficos" size="auto">
+        <ion-card style="width: 400px">
+          <ion-card-content>
+            <app-grafico-dona
+              [leyenda]="grafico.leyenda"
+              [labels]="grafico.labels"
+              [data]="grafico.data"
+              [type]="grafico.type"
+            >
+            </app-grafico-dona>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

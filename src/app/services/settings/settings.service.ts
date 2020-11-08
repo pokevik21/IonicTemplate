@@ -7,8 +7,9 @@ import { DOCUMENT } from '@angular/common';
 export class SettingsService {
 
   ajustes: Ajustes = {
-   temaUrl: 'assets/css/colors/default.css',
-   tema: 'default'
+  //  temaUrl: 'assets/css/colors/default.css',
+   dark: true,
+   themeColor: 'blue'
   };
 
 
@@ -26,21 +27,19 @@ export class SettingsService {
   cargarAjuestes() {
     if ( localStorage.getItem('ajustes') ){
       this.ajustes = JSON.parse( localStorage.getItem('ajustes') );
-      this.aplicarTema( this.ajustes.tema );
       // console.log('Cargado los ajustes');
-    }else {
-      console.log('Usando ajuestes por defecto');
-      this.aplicarTema( this.ajustes.tema );
     }
+    this.aplicarTema();
   }
 
-  aplicarTema( tema: string ){
+  aplicarTema( ){
 
-    const url = `assets/css/colors/${tema}.css`;
-    this.document.getElementById('theme').setAttribute('href', url);
+    if ( this.ajustes.dark ){
+      document.body.classList.add('dark');
+    }else{
+      document.body.classList.remove('dark');
+    }
 
-    this.ajustes.tema = tema;
-    this.ajustes.temaUrl = url;
     this.guardarAjustes();
 
   }
@@ -53,6 +52,7 @@ export class SettingsService {
 
 
 interface Ajustes {
-  temaUrl: string;
-  tema: string;
+  // temaUrl: string;
+  dark: boolean;
+  themeColor: string;
 }

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Page404Component implements OnInit {
 
+  year = new Date().getFullYear();
+
   constructor() { }
 
   ngOnInit() {}
