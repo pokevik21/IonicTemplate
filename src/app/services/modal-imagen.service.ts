@@ -1,5 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { environment } from '../../environments/environment';
+import { ModalImagenComponent } from '../components/modal-imagen/modal-imagen.component';
 
 const base_url = environment.base_url;
 
@@ -19,13 +21,14 @@ export class ModalImagenService {
     return this.OcultarModal;
   }
 
-  constructor() { }
+  constructor( public modalController: ModalController  ) { }
 
-  abrirModal( tipo: 'usuarios'|'medicos'|'hospitales',
-              id: string,
-              img: string = 'no-img'
+  async abrirModal(
+      tipo: 'usuarios'|'medicos'|'hospitales',
+      id: string,
+      img: string = 'no-img'
   ){
-    this.OcultarModal = false;
+    // this.OcultarModal = false;
     this.tipo = tipo;
     this.id = id;
     this.img = img;
@@ -36,10 +39,18 @@ export class ModalImagenService {
       this.img = `${ base_url }/upload/${ tipo }/${ img }`;
     }
 
+    const modal = await this.modalController.create({
+      component: ModalImagenComponent,
+    });
+
+    return await modal.present();
+
   }
 
   cerrarModal(){
-    this.OcultarModal = true;
+    this.modalController.dismiss({
+      dismissed: true
+    });
   }
 
 

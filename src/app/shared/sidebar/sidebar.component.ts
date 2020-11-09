@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -11,7 +11,7 @@ import { Usuario } from '../../models/usuario.model';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
 
   usuario: Usuario;
   public selectedIndex = '';
@@ -28,6 +28,10 @@ export class SidebarComponent implements OnInit {
     this.sidebarService.cargarMenu();
     this.usuario = usuarioService.usuario;
    }
+
+  ngOnDestroy(): void {
+    // console.log('destroyed');
+  }
 
    openFirst() {
     this.menu.enable(true, 'first');
@@ -84,6 +88,7 @@ export class SidebarComponent implements OnInit {
 
   logout(){
     this.usuarioService.logout();
+    this.ngOnDestroy();
   }
 
 }

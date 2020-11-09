@@ -3,7 +3,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { environment } from 'src/environments/environment';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, map, catchError, throwIfEmpty } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.model';
@@ -151,11 +151,11 @@ export class UsuarioService {
 
     this.auth2.signOut().then( () => {
       this.ngZone.run( () => {
-        this.router.navigateByUrl('login');
+        this.router.navigateByUrl('/login');
       });
     });
 
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('/login');
 
   }
 

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import Swal from 'sweetalert2';
+import { ThrowStmt } from '@angular/compiler';
 declare const gapi: any;
 
 @Component({
@@ -27,9 +28,12 @@ export class LoginComponent implements OnInit {
                private ngZone: NgZone ) {
   }
 
-  
   ngOnInit() {
     this.renderButton();
+    // if (localStorage.getItem('token')) {
+    //   // Mover al dashboard
+    //   this.router.navigateByUrl('/');
+    // }
   }
 
 
@@ -48,6 +52,7 @@ export class LoginComponent implements OnInit {
 
         // Mover al dashboard
         this.router.navigateByUrl('/');
+        
 
       },
         err => {
@@ -57,7 +62,6 @@ export class LoginComponent implements OnInit {
             text: err.error.msg
           });
         } );
-
   }
 
 

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalImagenService } from '../../services/modal-imagen.service';
-import { Usuario } from '../../models/usuario.model';
-import { UsuarioService } from '../../services/usuario.service';
 import { FileUploadService } from '../../services/file-upload.service';
 import Swal from 'sweetalert2';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-imagen',
@@ -17,7 +16,7 @@ export class ModalImagenComponent implements OnInit {
   public imgTmp: any;
 
   constructor( public modalImagenService: ModalImagenService,
-               private fileUploatSer: FileUploadService ) {
+               private fileUploatSer: FileUploadService) {
                }
 
   ngOnInit(): void {
