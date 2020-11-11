@@ -13,6 +13,32 @@
             </ion-label>
             <ion-toggle slot="end" [checked]="darkMode" (ionChange)="toggleDarkMode()"></ion-toggle>
           </ion-item>
+
+          <!-- <ion-item>
+            <ion-icon slot="start" icon="color-palette-outline" class="component-icon component-icon-dark"></ion-icon>
+            <ion-label>
+              Color principal
+            </ion-label>
+              
+            <ion-input 
+            slot="end" 
+            [(colorPicker)]="colorList[2].value" 
+            [style.background]="colorList[2].value"
+            [cpOKButton] = "true"
+            [cpOKButtonText] = "'Select'"
+            [cpCancelButton] = "true"
+            [cpSaveClickOutside] = "'false'"
+            [cpDisableInput]="false"
+            [cpAlphaChannel]="'disabled'" 
+            [cpOutputFormat]="'hex'"
+            [cpPresetColors]="presetValues"
+            [cpAddColorButton]="true">
+
+            </ion-input>
+            
+          </ion-item> -->
+
+
         </ion-list>
 
       </ion-card-content>

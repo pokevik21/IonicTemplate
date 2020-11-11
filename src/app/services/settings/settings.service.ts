@@ -15,6 +15,10 @@ export class SettingsService {
 
   constructor( @Inject(DOCUMENT) private document ){
     this.cargarAjuestes();
+
+    console.log(this.document.documentElement.style.getPropertyValue('--ion-color-primary'));
+    console.log(this.document.documentElement.style.getPropertyValue('--ion-color-primary'));
+
   }
 
 

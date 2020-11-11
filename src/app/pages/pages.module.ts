@@ -18,6 +18,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
 import { PerfilComponent } from './perfil/perfil.component';
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { PerfilComponent } from './perfil/perfil.component';
     RxjsComponent,
     HospitalesComponent,
     MedicosComponent,
+    MedicoComponent,
     UsuariosComponent,
     PagesComponent,
     PerfilComponent
@@ -46,7 +49,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     FormsModule,
     SharedModule,
     ReactiveFormsModule,
-    PipesModule
+    PipesModule,
+    ColorPickerModule
   ]
 })
 export class PagesModule { }

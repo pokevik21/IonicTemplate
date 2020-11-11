@@ -1,3 +1,123 @@
-<p>
-  usuarios works!
-</p>
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <ion-card class="ion-text-center">
+        <ion-input
+          #busquedaTermino
+          (keyup)="buscar(busquedaTermino.value)"
+          type="text"
+          class="form-control"
+          placeholder="Buscar usuario.."
+        >
+        </ion-input>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+              <ion-card-title> Usuarios </ion-card-title>
+              <ion-card-subtitle>
+                Usuarios registrados en la App
+              </ion-card-subtitle>
+            </ion-col>
+
+          </ion-row>
+
+          <ion-row class="ion-text-center" >
+            <ion-col>
+              <ion-row style="border-bottom: groove">
+                <ion-col col-2>
+                  <ion-label>Avatar</ion-label>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-label>Correo</ion-label>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-label>Nombre</ion-label>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-label>Role</ion-label>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-label>Auth</ion-label>
+                </ion-col>
+                <ion-col col-2 class="ion-text-end">
+                  <ion-label>Borrar</ion-label>
+                </ion-col>
+              </ion-row>
+
+              <ion-row
+                style="border-bottom: groove"
+                *ngFor="let usuario of usuarios"
+              >
+                <ion-col col-2>
+                  <img
+                    class="avatar cursor"
+                    [src]="usuario.img | imagen: 'usuario'"
+                    [alt]="usuario.nombre"
+                    (click)="abrirModal(usuario)"
+                  />
+                </ion-col>
+                <ion-col col-2>
+                  <ion-label>
+                    {{ usuario.email }}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col col-2>
+                  <ion-label>
+                    {{ usuario.nombre }}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col col-2>
+                  <ion-select class="form-control"
+                          [(ngModel)]="usuario.role"
+                          (ionChange)="cambiarRole(usuario)">
+                    <ion-select-option value="ADMIN_ROLE">Admin</ion-select-option>
+                    <ion-select-option value="USER_ROLE">User</ion-select-option>
+                  </ion-select>
+                </ion-col>
+
+                <ion-col col-2>
+                  <ng-container *ngIf="usuario.google; else elseTemplate">
+                      <ion-badge color="danger">Google</ion-badge>
+                  </ng-container>
+
+                  <ng-template #elseTemplate>
+                    <ion-badge color="primary">Normal</ion-badge>
+                  </ng-template>
+                </ion-col>
+
+                <ion-col col-2 class="ion-text-end">
+                  <ion-button
+                    color="danger"
+                    class="cursor"
+                    (click)="eliminarUsuario(usuario)"
+                    data-toggle="tooltip"
+                    data-original-title="Borrar"
+                  >
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+
+        <ion-card-content>
+          <ion-buttons>
+            <ion-button color="primary" (click)="cambiarPagina(-5)" > Anterior </ion-button>
+            <ion-button color="primary" (click)="cambiarPagina(5)"> Siguiente </ion-button>
+          </ion-buttons>
+        </ion-card-content>
+
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

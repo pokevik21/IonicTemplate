@@ -98,7 +98,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
     this.modalImageService.abrirModal( 'hospitales', hospital._id, hospital.img  );
   }
 
-  buscar( termino: string ){
+  buscar( termino: any ){
 
     if (termino.length === 0){
       return this.hospitales = this.hospitalesTmp;

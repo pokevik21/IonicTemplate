@@ -14,6 +14,7 @@ import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.comp
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminGuard } from '../guards/admin.guard';
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 
 
 const childRoutes: Routes = [
@@ -33,7 +34,7 @@ const childRoutes: Routes = [
   // Mantenimientos:
   { path: 'hospitales', component: HospitalesComponent , data: { titulo: 'Mantenimento de hopitales' }},
   { path: 'medicos', component: MedicosComponent , data: { titulo: 'Mantenimento de médicos' }},
-  { path: 'medico/:id', component: MedicosComponent , data: { titulo: 'Perfil de médico' }},
+  { path: 'medico/:id', component: MedicoComponent , data: { titulo: 'Perfil de médico' }},
 
   // Rutas de Admin
   { path: 'usuarios',
